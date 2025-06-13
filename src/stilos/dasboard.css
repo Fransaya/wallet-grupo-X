@@ -1,0 +1,288 @@
+.dashboard-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 100vh;
+  /* background-color: #f0f2f5; */
+  box-sizing: border-box;
+  padding: 24px;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+  gap: 10px;
+}
+.dashboard-header img {
+  width: 50px;
+  height: 50px;
+  margin-right: 16px;
+}
+
+.img-profile {
+  align-items: center;
+}
+
+.dashboard-header h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+}
+
+.dashboard-title {
+  margin-bottom: 0;
+}
+
+.title-h6 {
+  font-size: 30px;
+  font-weight: 600;
+  font-family: "Inclusive Sans", sans-serif;
+  color: #bb0a21;
+}
+
+.dashboard-top-bar {
+  display: flex;
+  align-items: end;
+  justify-content: flex-end;
+  gap: 16px;
+  width: 100%;
+  right: 50px;
+  position: relative;
+}
+
+.dashboard-greeting {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.dashboard-card-container {
+  height: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  padding: 12px;
+}
+
+.dashboard-card {
+  width: 500px;
+}
+
+.dashboard-card-header {
+  text-align: left;
+}
+
+.dashboard-balance {
+  text-align: left;
+  margin: 12px 0;
+  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+}
+
+.title-h1-balance {
+  text-align: center;
+  margin-bottom: 0.5em;
+  font-family: "Inclusive Sans", sans-serif;
+  font-size: 36px;
+  gap: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.dashboard-actions {
+  text-align: center;
+}
+
+/* Botones de transferencia, recibir y perfil*/
+.send-transfer,
+.get-transfer,
+.go-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.circle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px; /* Aumenta el tamaño si quieres más borde */
+  height: 48px;
+  border-radius: 50%;
+  background-color: #2563eb; /* Azul */
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  /* El borde azul externo ya está con el background */
+}
+
+.circle-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px; /* Más pequeño que el btn */
+  height: 36px;
+  border-radius: 50%;
+  background: #fff; /* Círculo blanco interno */
+  color: #2563eb; /* Cambia el color del icono si quieres */
+  font-size: 24px;
+}
+
+/* botones del home */
+.send-transfer-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 40px;
+  background-color: #2563eb;
+  color: white;
+  padding: 5px 5px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Contenido de tabla de transaccion */
+
+.transaction-amount {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+
+.transaction-icon-text {
+  display: flex;
+  align-items: center;
+}
+
+.p-transaction {
+  margin-bottom: 8px !important;
+}
+
+/* Btn para ver historial */
+.btn-see-historial {
+  display: flex;
+  width: 150px;
+  height: 40px;
+  background-color: #2563eb; /* Azul */
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+@media (max-width: 767px) {
+  .dashboard-container {
+    min-height: 100dvh;
+    height: 100dvh;
+    width: 100vw;
+    padding: 0;
+    align-items: flex-start;
+    justify-content: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    background: #fff; /* o el color de fondo que prefieras */
+  }
+
+  .dashboard-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px 16px 8px 16px;
+    gap: 12px;
+    width: 100vw;
+  }
+
+  .dashboard-header img {
+    width: 56px;
+    height: 56px;
+    margin-right: 0;
+  }
+
+  .dashboard-card-container,
+  .dashboard-card {
+    width: 100vw !important;
+    max-width: 100vw;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    align-items: stretch;
+  }
+
+  .dashboard-card {
+    margin: 0;
+    box-shadow: none;
+    padding: 16px 8px;
+  }
+
+  .dashboard-card-header {
+    font-size: 1.2em;
+    padding: 0 8px;
+  }
+
+  .dashboard-balance {
+    margin: 20px 0;
+    font-size: 2em;
+    justify-content: flex-start;
+    padding: 0 8px;
+  }
+
+  .title-h1-balance {
+    font-size: 2.2em;
+    gap: 16px;
+  }
+
+  .dashboard-actions {
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 0;
+    margin: 24px 0 16px 0;
+    padding: 0 8px;
+    width: 100vw;
+  }
+
+  .send-transfer,
+  .get-transfer,
+  .go-profile {
+    font-size: 1.1em;
+    gap: 8px;
+  }
+
+  .circle-btn {
+    width: 64px;
+    height: 64px;
+    font-size: 32px;
+  }
+
+  .circle-inner {
+    width: 48px;
+    height: 48px;
+    font-size: 28px;
+  }
+
+  .btn-see-historial {
+    width: 100%;
+    min-width: 0;
+    font-size: 1.1em;
+    height: 48px;
+    margin: 16px 0 0 0;
+    border-radius: 24px;
+  }
+
+  .dashboard-title,
+  .title-h6,
+  .dashboard-header h1 {
+    font-size: 1.3em !important;
+    text-align: left;
+    margin: 0;
+  }
+}

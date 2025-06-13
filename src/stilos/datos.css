@@ -1,0 +1,206 @@
+.datos-container {
+  width: 450px;
+}
+
+.datos-container {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  /* Otros estilos que ya tengas */
+}
+
+/* Difuminado en los bordes */
+.datos-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow: 0 0 40px 20px rgba(34, 34, 34, 0.18),
+    /* sombra difusa más fuerte */ 0 0 0 8px #fff inset;
+  z-index: 2;
+}
+
+.dashboard-header {
+  margin-bottom: 20px !important;
+}
+
+.title-h1 {
+  color: #bb0a21 !important;
+  font-size: 40px !important;
+}
+
+.btn {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+}
+
+.btn-home {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Fondo general */
+.user-profile-bg {
+  min-height: 100vh;
+  /* background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); */
+  padding: 40px 0;
+}
+
+/* Contenedor principal centrado y más ancho */
+.user-profile-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  margin-top: 40px;
+  padding: 0 16px;
+}
+
+/* Card principal más grande y con padding */
+.datos-container,
+.user-profile-card {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 24px !important;
+  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.12);
+  padding: 30px 30px 30px 30px;
+  min-height: 520px;
+  transition: box-shadow 0.3s;
+}
+
+.datos-container::before,
+.user-profile-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow: 0 0 40px 20px rgba(34, 34, 34, 0.1), 0 0 0 8px #fff inset;
+  z-index: 2;
+}
+
+/* Header y títulos */
+.dashboard-header {
+  margin-bottom: 20px !important;
+}
+
+.title-h1 {
+  color: #bb0a21 !important;
+  font-size: 2.7rem;
+  font-weight: 700;
+  text-align: center;
+  /* margin-bottom: 36px; */
+  letter-spacing: 1px;
+}
+
+.title-h4 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+/* Header de usuario */
+.user-profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 36px;
+  gap: 32px;
+}
+
+.ant-avatar {
+  width: 60px !important;
+  height: 60px !important;
+  font-size: 48px !important;
+}
+
+/* Info del usuario */
+.user-profile-info > div {
+  margin-bottom: 20px;
+  font-size: 19px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Botones */
+.user-profile-btns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 36px;
+  gap: 18px;
+}
+
+.btn-editar-pass {
+  background-color: #bb0a21 !important;
+  color: #fff !important;
+  border: none !important;
+  font-size: 17px !important;
+  height: 48px !important;
+  padding: 0 32px !important;
+  border-radius: 8px !important;
+  transition: background 0.2s;
+}
+
+.btn-editar-pass:hover {
+  background-color: #a0091d !important;
+}
+
+.btn-editar-perfil {
+  background-color: #1976d2 !important;
+  color: #fff !important;
+  border: none !important;
+  font-size: 17px !important;
+  height: 48px !important;
+  padding: 0 32px !important;
+  border-radius: 8px !important;
+  transition: background 0.2s;
+}
+
+.btn-editar-perfil:hover {
+  background-color: #125ea7 !important;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .user-profile-wrapper {
+    max-width: 100%;
+    padding: 0 8px;
+  }
+  .datos-container,
+  .user-profile-card {
+    max-width: 98vw;
+    padding: 32px 10px 24px 10px;
+    min-height: unset;
+  }
+  .user-profile-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+  .ant-avatar {
+    width: 80px !important;
+    height: 80px !important;
+    font-size: 36px !important;
+  }
+  .title-h1 {
+    font-size: 2rem;
+  }
+  .title-h4 {
+    font-size: 1.2rem;
+  }
+  .user-profile-info > div {
+    font-size: 16px;
+  }
+  .user-profile-btns {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    margin-top: 24px;
+  }
+}
