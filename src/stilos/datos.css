@@ -92,6 +92,10 @@
   color: #4fc3f7 !important;
 }
 
+.ant-typography{
+  color: white;
+}
+
 .user-profile-info .ant-tag {
   color: #fff !important;
   background: #2563eb !important;

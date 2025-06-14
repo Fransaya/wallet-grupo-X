@@ -121,6 +121,19 @@ const DatosUser = () => {
     <div className="dashboard-container user-profile-bg">
       <div className="user-profile-wrapper">
         <div className="profile-main-card">
+          <div className="page-header">
+            <div className="page-title-container">
+              <h1 className="title-h1 profile-title">Perfil de {user.name}</h1>
+            </div>
+            <button 
+              className="back-home-btn"
+              onClick={() => navigate("/dashboard")}
+            >
+              <HomeOutlined />
+              Volver al Inicio
+            </button>
+          </div>
+
           <div className="profile-main-grid">
             {/* Columna izquierda: avatar y username */}
             <div className="profile-avatar-col">
@@ -143,7 +156,6 @@ const DatosUser = () => {
             </div>
             {/* Columna derecha: datos */}
             <div className="profile-info-col">
-              <h1 className="title-h1 profile-title">Perfil de {user.name}</h1>
               <div className="profile-info-list">
                 <div>
                   <UserOutlined /> <Text strong>ID:</Text>{" "}
@@ -184,30 +196,19 @@ const DatosUser = () => {
                   </Text>
                 </div>
               </div>
-              <div className="profile-btns">
-                <Button
-                  className="btn-editar-perfil"
-                  icon={<EditOutlined />}
-                  size="large"
-                  style={{
-                    height: 40,
-                    padding: "0 10px",
-                    background: "#f0f0f0",
-                  }}
-                  onClick={openEditModal}
-                >
-                  Editar perfil
-                </Button>
-                <Button
-                  className="btn-volver-home"
-                  icon={<HomeOutlined />}
-                  size="large"
-                  style={{ height: 40, padding: "0 10px" }}
-                  onClick={() => navigate("/dashboard")}
-                >
-                  Volver al Home
-                </Button>
-              </div>
+              <Button
+                className="btn-editar-perfil"
+                icon={<EditOutlined />}
+                size="large"
+                style={{
+                  height: 40,
+                  padding: "0 10px",
+                  background: "#f0f0f0",
+                }}
+                onClick={openEditModal}
+              >
+                Editar perfil
+              </Button>
             </div>
           </div>
         </div>

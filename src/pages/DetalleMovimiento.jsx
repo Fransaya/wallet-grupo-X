@@ -33,26 +33,27 @@ const DetalleMovimiento = () => {
   const monto = `R$ ${Math.abs(amount)}`;
 
   return (
-    <div className='dashboard-container'>
-      <h1 className='title-h1'>RauloCoins</h1>
-      <Card className='dellate-container' bodyStyle={{ height: 300 }}>
+    <div className="dashboard-container">
+      <div className="page-header">
+        <div className="page-title-container">
+          <h1 className="title-h1">Detalle de Transacción</h1>
+        </div>
+        <button 
+          className="back-home-btn"
+          onClick={() => navigate("/dashboard")}
+        >
+          <HomeOutlined />
+          Volver al Inicio
+        </button>
+      </div>
+
+      <Card className="dellate-container" bodyStyle={{ height: 300 }}>
         <div className="titulo-home">
           <h3 className='title-h3'>{tipo}</h3>
-            <div className='contenedor-button'>
-              <Button
-                color='default'
-                variant='outlined'
-                icon={<HomeOutlined />}
-                iconPosition='end'
-                onClick={() => navigate('/dashboard')}
-              >
-              </Button>
-            </div>
         </div>
 
-        {/* Contenido alineado a la izquierda */}
-        <div style={{ textAlign: 'left' }} className='info-transferencia'>
-          <Text className='margin-bottom'>
+        <div className="info-transferencia">
+          <Text className="margin-bottom">
             <strong>ID Transacción:</strong> {id}
           </Text>
           <Text>
@@ -87,7 +88,6 @@ const DetalleMovimiento = () => {
           )}
         </div>
 
-        {/* Contenido centrado */}
         <div
           className={`valor-transferencia ${esEnvio ? 'enviada' : 'recibida'}`}
         >

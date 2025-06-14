@@ -1,23 +1,29 @@
 import "./UserSidebar.css";
+import { UserOutlined, DollarOutlined } from "@ant-design/icons";
 
-export const UserSidebar = ({ user }) => {
+export function UserSidebar({ user }) {
   return (
-    <div className="user-sidebar-card">
+    <div className="user-sidebar">
       <div className="user-sidebar-header">
-        <p className="user-sidebar-name">{user.name}</p>
+        <div className="user-sidebar-avatar">
+          <UserOutlined style={{ fontSize: "2.5rem", color: "white" }} />
+        </div>
+        <h3 className="user-sidebar-name">{user.name}</h3>
         <p className="user-sidebar-email">{user.email}</p>
+        <span className="user-sidebar-alias">@{user.alias}</span>
       </div>
-      <div className="user-sidebar-info">
-        <p>
-          <span className="user-sidebar-label">Tu Balance</span>: {user.balance}
-        </p>
-        <p>
-          <span className="user-sidebar-label">Alias</span>: {user.alias}
-        </p>
+
+      <div className="user-sidebar-balance">
+        <div className="user-sidebar-balance-label">
+          <DollarOutlined style={{ marginRight: "0.5em" }} />
+          Balance Actual
+        </div>
+        <div className="user-sidebar-balance-amount">
+          {user.balance}$R
+        </div>
       </div>
-      <button className="user-sidebar-btn">← Volver a Inicio</button>
     </div>
   );
-};
+}
 
-// aca faltaria traner los datos de la db
+

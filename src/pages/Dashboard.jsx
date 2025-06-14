@@ -10,6 +10,7 @@ import {
   ArrowDownOutlined,
   ArrowUpOutlined,
   EyeFilled,
+  UserOutlined,
 } from "@ant-design/icons";
 
 import { LuWallet } from "react-icons/lu";
@@ -65,6 +66,13 @@ const Dashboard = () => {
     navigate("/historial");
   };
 
+  const handleLogout = () => {
+    // Limpiar la sesión
+    sessionStorage.clear();
+    // Redirigir al login
+    navigate("/");
+  };
+
   return (
     (loading && (
       <div className="loading-container">
@@ -72,6 +80,17 @@ const Dashboard = () => {
       </div>
     )) || (
       <div className="dashboard-container">
+        {/* Botón de cerrar sesión */}
+        <div className="dashboard-top-bar">
+          <Button 
+            className="dashboard-logout-btn" 
+            onClick={handleLogout}
+            icon={<LogoutOutlined />}
+          >
+            Cerrar Sesión
+          </Button>
+        </div>
+
         {/* Fila superior: saludo y avatar */}
         <div className="dashboard-row-top">
           <div className="dashboard-greeting-block">
@@ -81,11 +100,9 @@ const Dashboard = () => {
             <p className="dashboard-greeting-sub">Bienvenido a tu billetera</p>
           </div>
           <div className="dashboard-avatar-block">
-            <img
-              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-              alt="Profile avatar"
-              className="dashboard-avatar-img"
-            />
+            <div className="dashboard-avatar-img">
+              <UserOutlined />
+            </div>
           </div>
         </div>
 

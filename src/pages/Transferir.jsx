@@ -193,15 +193,17 @@ const Transferir = () => {
 
   return (
     <div className="transferir-container">
-      <div className="transferir-header-row">
-        <h1 className="title-h1 transferir-title-main">Transferir</h1>
-        <Button
-          className="transferir-btn-home"
-          icon={<HomeOutlined />}
+      <div className="page-header">
+        <div className="page-title-container">
+          <h1 className="title-h1 transferir-title-main">Transferir</h1>
+        </div>
+        <button 
+          className="back-home-btn"
           onClick={() => navigate("/dashboard")}
         >
-          Volver al Home
-        </Button>
+          <HomeOutlined />
+          Volver al Inicio
+        </button>
       </div>
       {loadingConfirmacion ? (
         <div className="loading-container">
