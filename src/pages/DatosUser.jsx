@@ -132,6 +132,11 @@ const DatosUser = () => {
           className="datos-container user-profile-card"
           bodyStyle={{ padding: "0px" }}
           bordered={false}
+ style={{
+            backgroundColor: "#1e1e1e", // Dark background
+            color: "#ffffff", // Light text color
+            border: "1px solid #333", // Subtle border
+          }}
         >
           <div className="user-profile-header">
             <Avatar size={80} icon={<UserOutlined />} />
@@ -157,7 +162,11 @@ const DatosUser = () => {
               </Text>
               <Button
                 onClick={() => handleRoute("/dashboard")}
-                icon={<HomeOutlined />}
+ icon={<HomeOutlined style={{ color: '#ffffff' }} />} // Changed icon color to white
+ style={{
+                  height: 40,
+                  padding: '0 10px'
+                }}
                 size="large"
                 style={{ height: 40, padding: "0 10px" }}
               ></Button>

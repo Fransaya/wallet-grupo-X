@@ -1,7 +1,15 @@
-export const Button = () => {
+import React from 'react';
+
+export const Button = ({ children, onClick, className, ...props }) => {
     return (
-        <div>
-            Button
-        </div>
-    )
-}
+        <button
+            className={`minimalist-button ${className || ''}`}
+            onClick={onClick}
+            {...props}
+        >
+            {children}
+        </button>
+    );
+};
+
+export default Button;

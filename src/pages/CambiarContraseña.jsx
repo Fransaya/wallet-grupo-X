@@ -53,7 +53,7 @@ const CambiarContraseña = () => {
   };
 
   return (
-    <div className="container">
+    <div className="dashboard-container">
       <div className="password-change-container">
         <div className="password-form-section">
           <h1>Cambiar Contraseña</h1>
@@ -92,7 +92,7 @@ const CambiarContraseña = () => {
             </div>
             <div className="container-btn">
               <button
-                className="btn-cancelar"
+                className="btn-cancelar ant-btn"
                 type="button"
                 onClick={handleCancel}
               >
@@ -100,7 +100,7 @@ const CambiarContraseña = () => {
               </button>
               <button
                 type="submit"
-                className="btn-password"
+                className="btn-password ant-btn ant-btn-primary"
                 onClick={handleSubmit}
               >
                 Cambiar Contraseña

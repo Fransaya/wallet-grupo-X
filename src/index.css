@@ -2,4 +2,6 @@ html, body, #root {
   height: 100%;
   margin: 0;
   padding: 0;
+  /* Ensure dark background for the entire app */
+  background-color: #121212; 
 }

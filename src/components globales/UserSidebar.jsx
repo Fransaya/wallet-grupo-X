@@ -1,12 +1,12 @@
 export const UserSidebar = ({user}) => {
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 w-full max-w-sm">
-      <div className="text-right text-sm text-gray-500">
+    <div className="dark-card p-6 w-full max-w-sm">
+      <div className="text-right text-sm text-gray-300">
         <p>{user.name}</p>
         <p className="text-xs">{user.email}</p>
       </div>
-    
-      <div className="mt-4 text-sm space-y-1">
+
+      <div className="mt-6 text-sm space-y-2">
         <p>
           <span className="text-blue-500 font-semibold">Tu Balance</span>: {user.balance}
         </p>
@@ -15,7 +15,7 @@ export const UserSidebar = ({user}) => {
         </p>
       </div>
 
-      <button className="mt-6 bg-blue-500 text-white py-2 px-4 rounded-full w-full">
+      <button className="dark-button mt-8">
         ← Volver a Inicio
       </button>
     </div>

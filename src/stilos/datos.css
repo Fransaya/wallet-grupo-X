@@ -1,52 +1,9 @@
-.datos-container {
-  width: 450px;
-}
-
-.datos-container {
-  position: relative;
-  overflow: hidden;
-  background: #fff;
-  /* Otros estilos que ya tengas */
-}
-
-/* Difuminado en los bordes */
-.datos-container::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  border-radius: inherit;
-  box-shadow: 0 0 40px 20px rgba(34, 34, 34, 0.18),
-    /* sombra difusa más fuerte */ 0 0 0 8px #fff inset;
-  z-index: 2;
-}
-
-.dashboard-header {
-  margin-bottom: 20px !important;
-}
-
-.title-h1 {
-  color: #bb0a21 !important;
-  font-size: 40px !important;
-}
-
-.btn {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: center;
-}
-
-.btn-home {
-  display: flex;
-  justify-content: flex-end;
-}
-
 /* Fondo general */
 .user-profile-bg {
   min-height: 100vh;
-  /* background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); */
+  background-color: #1a1a1a; /* Fondo oscuro */
   padding: 40px 0;
+  color: #f0f0f0; /* Color de texto claro por defecto */
 }
 
 /* Contenedor principal centrado y más ancho */
@@ -65,43 +22,40 @@
   margin: 0 auto;
   position: relative;
   overflow: hidden;
-  background: #fff;
-  border-radius: 24px !important;
-  box-shadow: 0 8px 32px rgba(44, 62, 80, 0.12);
-  padding: 30px 30px 30px 30px;
+  background-color: #2a2a2a; /* Fondo oscuro para la tarjeta */
+  border-radius: 12px; /* Bordes menos redondeados */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Sombra sutil y oscura */
+  padding: 30px;
   min-height: 520px;
   transition: box-shadow 0.3s;
+  color: #f0f0f0; /* Color de texto claro */
 }
 
+/* Remove the inset box-shadow effect */
 .datos-container::before,
 .user-profile-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  border-radius: inherit;
-  box-shadow: 0 0 40px 20px rgba(34, 34, 34, 0.1), 0 0 0 8px #fff inset;
-  z-index: 2;
+  content: none;
 }
+
 
 /* Header y títulos */
 .dashboard-header {
-  margin-bottom: 20px !important;
+  margin-bottom: 30px;
 }
 
 .title-h1 {
-  color: #bb0a21 !important;
+  color: #7b68ee; /* Color de acento (violeta sutil) */
   font-size: 2.7rem;
   font-weight: 700;
   text-align: center;
-  /* margin-bottom: 36px; */
   letter-spacing: 1px;
 }
 
 .title-h4 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 600;
   margin-bottom: 0;
+  color: #f0f0f0;
 }
 
 /* Header de usuario */
@@ -113,94 +67,146 @@
 }
 
 .ant-avatar {
-  width: 60px !important;
-  height: 60px !important;
+  width: 70px !important; /* Ajusta tamaño */
+  height: 70px !important; /* Ajusta tamaño */
   font-size: 48px !important;
+  background-color: #7b68ee !important; /* Color de acento para el avatar */
 }
 
 /* Info del usuario */
 .user-profile-info > div {
   margin-bottom: 20px;
-  font-size: 19px;
+  font-size: 18px;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px; /* Aumenta el espacio entre elementos */
 }
+
+.user-profile-info .ant-typography-secondary {
+  color: #cccccc !important; /* Color sutil para texto secundario */
+}
+
+.user-profile-info .ant-typography-strong {
+  color: #f0f0f0 !important; /* Color de texto fuerte */
+}
+
 
 /* Botones */
 .user-profile-btns {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 36px;
-  gap: 18px;
+  margin-top: 40px; /* Aumenta el margen superior */
+  gap: 20px; /* Aumenta el espacio entre botones */
+}
+
+.btn-editar-pass,
+.btn-editar-perfil {
+  color: #f0f0f0 !important;
+  border: none !important;
+  font-size: 16px !important;
+  height: 45px !important; /* Ajusta la altura */
+  padding: 0 28px !important; /* Ajusta el padding */
+  border-radius: 6px !important; /* Ajusta el radio del borde */
+  transition: background-color 0.2s, transform 0.1s;
 }
 
 .btn-editar-pass {
-  background-color: #bb0a21 !important;
-  color: #fff !important;
-  border: none !important;
-  font-size: 17px !important;
-  height: 48px !important;
-  padding: 0 32px !important;
-  border-radius: 8px !important;
-  transition: background 0.2s;
+  background-color: #bb0a21 !important; /* Color rojo */
 }
 
 .btn-editar-pass:hover {
   background-color: #a0091d !important;
+  transform: translateY(-2px);
 }
 
 .btn-editar-perfil {
-  background-color: #1976d2 !important;
-  color: #fff !important;
-  border: none !important;
-  font-size: 17px !important;
-  height: 48px !important;
-  padding: 0 32px !important;
-  border-radius: 8px !important;
-  transition: background 0.2s;
+  background-color: #7b68ee !important; /* Color de acento */
 }
 
 .btn-editar-perfil:hover {
-  background-color: #125ea7 !important;
+  background-color: #6a5acd !important;
+  transform: translateY(-2px);
 }
 
 /* Responsive */
 @media (max-width: 900px) {
   .user-profile-wrapper {
     max-width: 100%;
-    padding: 0 8px;
+    padding: 0 16px;
   }
   .datos-container,
   .user-profile-card {
-    max-width: 98vw;
-    padding: 32px 10px 24px 10px;
+    max-width: 100%;
+    padding: 32px 20px 24px 20px; /* Ajusta el padding */
     min-height: unset;
   }
   .user-profile-header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 18px;
+    gap: 20px; /* Ajusta el espacio */
   }
   .ant-avatar {
-    width: 80px !important;
-    height: 80px !important;
+    width: 60px !important;
+    height: 60px !important;
     font-size: 36px !important;
   }
   .title-h1 {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
   .title-h4 {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
   .user-profile-info > div {
-    font-size: 16px;
+    font-size: 17px;
+    gap: 10px;
   }
   .user-profile-btns {
     flex-direction: column;
     align-items: stretch;
-    gap: 12px;
-    margin-top: 24px;
+    gap: 15px; /* Ajusta el espacio */
+    margin-top: 30px; /* Ajusta el margen */
   }
+}
+
+/* Ensure Ant Design components respect the dark theme */
+.ant-modal-content {
+  background-color: #2a2a2a !important;
+  color: #f0f0f0 !important;
+}
+
+.ant-modal-header {
+  background-color: #2a2a2a !important;
+  border-bottom: 1px solid #444 !important;
+}
+
+.ant-modal-title {
+  color: #f0f0f0 !important;
+}
+
+.ant-form-item-label > label {
+  color: #cccccc !important;
+}
+
+.ant-input, .ant-select-selector {
+  background-color: #3a3a3a !important;
+  border-color: #555 !important;
+  color: #f0f0f0 !important;
+}
+
+.ant-input::placeholder {
+  color: #aaaaaa !important;
+}
+
+.ant-select-arrow {
+  color: #f0f0f0 !important;
+}
+
+.ant-select-item-option-content {
+  color: #f0f0f0 !important;
+}
+
+.ant-select-dropdown {
+    background-color: #3a3a3a !important;
+    border-color: #555 !important;
 }

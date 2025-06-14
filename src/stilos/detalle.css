@@ -4,11 +4,11 @@
 }
 
 .recibida {
-  border: 2px solid rgba(0, 128, 0, 0.75);
+ border: 1px solid rgba(0, 255, 0, 0.5);
 }
 
 .enviada{
-	border: 2px solid rgba(255, 0, 0, 0.75);
+ border: 1px solid rgba(255, 0, 0, 0.5);
 }
 
 .info-transferencia {
@@ -19,11 +19,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid rgba(0, 128, 0, 0.75);
+ border: 1px solid rgba(0, 255, 0, 0.5); /* Default border, will be overridden by .recibida/.enviada */
   border-radius: 1rem;
   margin: 0 auto; /* centrado horizontal */
   padding: 0.5rem 1rem;
-  width: fit-content;
+ width: fit-content; /* Adjusted for better control */
 }
 
 .titulo-home{
@@ -46,6 +46,20 @@
 	margin-bottom: 16px;
 }
 
+/* Card principal */
 .dellate-container{
   width: 450px;
+ background-color: #1e1e1e; /* Dark background */
+ color: #e0e0e0; /* Light text color */
+ padding: 24px; /* Increased padding */
+ border-radius: 8px; /* Slightly rounded corners */
+ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+ .dellate-container {
+ width: 95%; /* Adjust width for mobile */
+ padding: 16px;
+ }
 }

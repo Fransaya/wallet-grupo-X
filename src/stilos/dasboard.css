@@ -1,10 +1,9 @@
 .dashboard-container {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-direction: column;
   min-height: 100vh;
-  /* background-color: #f0f2f5; */
   box-sizing: border-box;
   padding: 24px;
 }
@@ -12,7 +11,7 @@
 .dashboard-header {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: row;
   width: 100%;
   gap: 10px;
@@ -30,7 +29,7 @@
 .dashboard-header h1 {
   font-size: 24px;
   font-weight: 600;
-  color: #333;
+  color: #e0e0e0; /* Light gray */
 }
 
 .dashboard-title {
@@ -39,8 +38,8 @@
 
 .title-h6 {
   font-size: 30px;
-  font-weight: 600;
-  font-family: "Inclusive Sans", sans-serif;
+  font-weight: 700;
+  font-family: "Poppins", sans-serif;
   color: #bb0a21;
 }
 
@@ -63,13 +62,18 @@
   height: min-content;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 4px;
-  padding: 12px;
+  justify-content: flex-start;
+  gap: 20px; /* Increased gap between cards */
+  padding: 0; /* Remove padding */
+  width: 100%; /* Full width */
+  max-width: 600px; /* Max width for larger screens */
+  margin: 0 auto; /* Center the container */
 }
 
 .dashboard-card {
-  width: 500px;
+  width: 100%;
+  background-color: #282828; /* Dark background */
+  border-radius: 12px; /* Rounded corners */
 }
 
 .dashboard-card-header {
@@ -80,8 +84,8 @@
   text-align: left;
   margin: 12px 0;
   flex-direction: row;
-  display: flex;
-  justify-content: space-between;
+ display: flex;
+  justify-content: flex-start;
 }
 
 .title-h1-balance {
@@ -89,7 +93,7 @@
   margin-bottom: 0.5em;
   font-family: "Inclusive Sans", sans-serif;
   font-size: 36px;
-  gap: 10px;
+  gap: 15px; /* Increased gap */
   display: flex;
   align-items: center;
 }
@@ -110,8 +114,8 @@
 .circle-btn {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 48px; /* Aumenta el tamaño si quieres más borde */
+  justify-content: center; /* Center the circle */
+  width: 48px;
   height: 48px;
   border-radius: 50%;
   background-color: #2563eb; /* Azul */
@@ -124,8 +128,8 @@
 .circle-inner {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 36px; /* Más pequeño que el btn */
+  justify-content: center; /* Center the inner circle */
+  width: 36px;
   height: 36px;
   border-radius: 50%;
   background: #fff; /* Círculo blanco interno */
@@ -150,8 +154,7 @@
 /* Contenido de tabla de transaccion */
 
 .transaction-amount {
-  width: 100%;
-  display: flex;
+ display: flex;
   justify-content: end;
 }
 
@@ -171,7 +174,7 @@
   height: 40px;
   background-color: #2563eb; /* Azul */
   color: white;
-  font-size: 16px;
+  font-size: 14px; /* Smaller font size */
   border: none;
   border-radius: 50px;
   cursor: pointer;
@@ -180,13 +183,10 @@
 @media (max-width: 767px) {
   .dashboard-container {
     min-height: 100dvh;
-    height: 100dvh;
     width: 100vw;
     padding: 0;
     align-items: flex-start;
-    justify-content: flex-start;
     display: flex;
-    flex-direction: column;
     gap: 0;
     background: #fff; /* o el color de fondo que prefieras */
   }
@@ -194,8 +194,8 @@
   .dashboard-header {
     flex-direction: row;
     align-items: center;
-    justify-content: flex-start;
-    padding: 20px 16px 8px 16px;
+    justify-content: space-between; /* Space between title and avatar */
+    padding: 20px 16px 8px 16px; /* Adjust padding */
     gap: 12px;
     width: 100vw;
   }
@@ -209,12 +209,11 @@
   .dashboard-card-container,
   .dashboard-card {
     width: 100vw !important;
-    max-width: 100vw;
+    max-width: 100%; /* Use percentage for responsiveness */
     min-width: 0;
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    border-radius: 0;
     align-items: stretch;
   }
 
@@ -222,7 +221,7 @@
     margin: 0;
     box-shadow: none;
     padding: 16px 8px;
-  }
+    border-radius: 0; /* Remove rounded corners on mobile */
 
   .dashboard-card-header {
     font-size: 1.2em;
@@ -231,7 +230,7 @@
 
   .dashboard-balance {
     margin: 20px 0;
-    font-size: 2em;
+    font-size: 1.8em; /* Adjust font size */
     justify-content: flex-start;
     padding: 0 8px;
   }
@@ -240,7 +239,7 @@
     font-size: 2.2em;
     gap: 16px;
   }
-
+  
   .dashboard-actions {
     flex-direction: row;
     justify-content: space-around;
@@ -264,8 +263,8 @@
   }
 
   .circle-inner {
-    width: 48px;
-    height: 48px;
+    width: 42px; /* Slightly smaller inner circle */
+    height: 42px;
     font-size: 28px;
   }
 

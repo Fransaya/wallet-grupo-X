@@ -79,13 +79,8 @@ const Dashboard = () => {
       </div>
     )) || (
       <div className="dashboard-container">
-        <div className="dashboard-top-bar">
+        <div className="dashboard-top-bar" style={{ justifyContent: 'flex-end' }}>
           <Button
-            type="default"
-            color="danger"
-            variant="filled"
-            onClick={handleLogout}
-            icon={<LogoutOutlined style={{ color: "BB0A21" }} />}
             iconPosition="end"
           >
             Cerrar Sesion
@@ -93,7 +88,7 @@ const Dashboard = () => {
         </div>
         <div className="dashboard-header">
           <p className="title-h1">
-            Hola <strong>{data.name}.</strong> Bienvenido
+            Hola <strong style={{ color: '#fff' }}>{data.name}.</strong> Bienvenido
           </p>
           <div className="img-profile">
             <img
@@ -106,7 +101,7 @@ const Dashboard = () => {
 
         <div className="dashboard-card-container">
           <div className="dashboard-card">
-            <div className="dashboard-card-header">
+            <div className="dashboard-card-header" style={{ borderBottom: 'none' }}>
               <h6 className="title-h6">
                 Tu Balance <EyeFilled style={{ color: "#BB0A21" }} />
               </h6>
@@ -114,7 +109,7 @@ const Dashboard = () => {
 
             <div className="dashboard-balance">
               <h1 className="title-h1-balance" style={{ margin: "0" }}>
-                <LuWallet style={{ color: "#1677ff", fontSize: "32px" }} />
+                <LuWallet style={{ color: "#00bcd4", fontSize: "32px" }} />
                 {data ? `${data.balance}` : "Cargando..."}
               </h1>
             </div>
@@ -144,7 +139,6 @@ const Dashboard = () => {
         </div>
 
         <div
-          className="dashboard-card"
           style={{ marginTop: "30px" }}
           bodyStyle={{ padding: "12px" }}
         >
