@@ -1,0 +1,32 @@
+.minimalist-button {
+  background: linear-gradient(90deg, #2563eb 0%, #7b68ee 100%);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 0.85em 2.2em;
+  font-size: 1.1rem;
+  font-weight: 600;
+  box-shadow: 0 2px 12px rgba(37, 99, 235, 0.08);
+  cursor: pointer;
+  transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+  outline: none;
+  margin: 0.5em 0;
+  letter-spacing: 0.5px;
+}
+.minimalist-button:hover,
+.minimalist-button:focus {
+  background: linear-gradient(90deg, #7b68ee 0%, #2563eb 100%);
+  box-shadow: 0 4px 24px rgba(123, 104, 238, 0.15);
+  transform: translateY(-2px) scale(1.03);
+}
+.minimalist-button:active {
+  background: #2563eb;
+  transform: scale(0.98);
+}
+@media (max-width: 600px) {
+  .minimalist-button {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.9em 0;
+  }
+}

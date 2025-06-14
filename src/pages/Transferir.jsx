@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Typography,
   Select,
@@ -8,15 +8,15 @@ import {
   Space,
   message,
   notification,
-  Spin
-} from 'antd';
-import { useNavigate } from 'react-router-dom';
-import { HomeOutlined } from '@ant-design/icons';
-import { buscarUsuarios } from '../fetchs/transferenciaService';
-import axios from 'axios';
-import ModalTOTP from '../components globales/ModalTOTP';
-import '../stilos/transferir.css';
-import Endpoints from '../API/Endpoints';
+  Spin,
+} from "antd";
+import { useNavigate } from "react-router-dom";
+import { HomeOutlined } from "@ant-design/icons";
+import { buscarUsuarios } from "../fetchs/transferenciaService";
+import axios from "axios";
+import ModalTOTP from "../components globales/ModalTOTP";
+import "../stilos/transferir.css";
+import Endpoints from "../API/Endpoints";
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -24,48 +24,43 @@ const { Option } = Select;
 const Transferir = () => {
   const navigate = useNavigate();
 
-  const [aliasSeleccionado, setAliasSeleccionado] = useState('');
-  const [monto, setMonto] = useState('');
+  const [aliasSeleccionado, setAliasSeleccionado] = useState("");
+  const [monto, setMonto] = useState("");
   const [opciones, setOpciones] = useState([]);
   const [loading, setLoading] = useState(false);
   const [mostrarModal, setMostrarModal] = useState(false);
-  const [nombreDestino, setNombreDestino] = useState('');
-  const [usuarioDestino, setUsuarioDestino] = useState('');
-  const [descripcion, setDescripcion] = useState('Varios');
+  const [usuarioDestino, setUsuarioDestino] = useState("");
+  const [descripcion, setDescripcion] = useState("Varios");
   const [loadingConfirmacion, setLoadingConfirmacion] = useState(false);
 
   const handleTransferencia = () => {
-    const userData = sessionStorage.getItem('user');
+    const userData = sessionStorage.getItem("user");
     if (!userData) {
-      alert('No se encontró la información del usuario actual.');
+      alert("No se encontró la información del usuario actual.");
       return;
     }
 
     const usuarioActual = JSON.parse(userData);
 
     if (!usuarioDestino || !monto) {
-      return message.warning('Por favor, completa todos los campos.');
+      return message.warning("Por favor, completa todos los campos.");
     }
 
     if (usuarioDestino.username === usuarioActual.user.username) {
-      return message.warning('No puedes transferirte a vos mismo.');
+      return message.warning("No puedes transferirte a vos mismo.");
     }
 
     if (parseFloat(monto) <= 0) {
-      return message.warning('El monto debe ser mayor a cero.');
+      return message.warning("El monto debe ser mayor a cero.");
     }
 
     if (parseFloat(monto) > usuarioActual.user.balance) {
       return message.warning(
-        'No tienes saldo suficiente para realizar esta transferencia.'
+        "No tienes saldo suficiente para realizar esta transferencia."
       );
     }
 
-    // Buscamos el nombre del destinatario para mostrarlo en el modal
-    const destinatario = opciones.find(
-      (user) => user.username === aliasSeleccionado
-    );
-    setNombreDestino(destinatario?.name || '');
+    // Solo mostrar el modal
     setMostrarModal(true); // Mostramos el modal TOTP
   };
 
@@ -74,50 +69,50 @@ const Transferir = () => {
     toUsername,
     amount,
     description,
-    operationToken
+    operationToken,
   }) => {
     const config = {
-      method: 'POST',
+      method: "POST",
       url: Endpoints.getUrl(Endpoints.TRANSFERENCIA.TRANSFERIR),
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       data: {
         fromUsername,
         toUsername,
         amount,
         description,
-        operationToken
-      }
+        operationToken,
+      },
     };
 
     const response = await axios(config);
 
     const historialConfig = {
-      method: 'POST',
+      method: "POST",
       url: Endpoints.getUrl(Endpoints.TRANSFERENCIA.HISTORIAL),
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       data: {
         username: fromUsername,
-        totpToken: operationToken
-      }
+        totpToken: operationToken,
+      },
     };
 
     const historialResponse = await axios(historialConfig);
 
     if (historialResponse.data.success) {
       sessionStorage.setItem(
-        'transactions',
+        "transactions",
         JSON.stringify(historialResponse.data.transactions)
       );
-      sessionStorage.setItem('balance', historialResponse.data.user.balance);
+      sessionStorage.setItem("balance", historialResponse.data.user.balance);
     }
 
     if (response.status < 200 || response.status >= 300) {
       throw new Error(
-        response.data?.message || 'Error al realizar la transferencia'
+        response.data?.message || "Error al realizar la transferencia"
       );
     }
 
@@ -125,10 +120,10 @@ const Transferir = () => {
   };
 
   const handleConfirmarTotp = async (totp) => {
-    const userData = sessionStorage.getItem('user');
+    const userData = sessionStorage.getItem("user");
 
     if (!userData) {
-      message.error('No se encontró información del usuario actual.');
+      message.error("No se encontró información del usuario actual.");
       return;
     }
 
@@ -142,45 +137,44 @@ const Transferir = () => {
         toUsername: usuarioDestino.username,
         amount: parseFloat(monto),
         description: descripcion,
-        operationToken: totp
+        operationToken: totp,
       });
 
       notification.success({
-        message: 'Transferencia exitosa',
+        message: "Transferencia exitosa",
         description: resultado.message,
-        placement: 'topRight'
+        placement: "topRight",
       });
 
       // Actualizar el usuario en sessionStorage con el nuevo balance
       sessionStorage.setItem(
-        'user',
+        "user",
         JSON.stringify({
           ...usuarioActual,
           user: {
             ...usuarioActual.user,
-            balance: resultado.transfer.from.newBalance
-          }
+            balance: resultado.transfer.from.newBalance,
+          },
         })
       );
 
       // Reset de estado
-      setMonto('');
-      setDescripcion('');
-      setUsuarioDestino('');
-      setNombreDestino('');
-      setAliasSeleccionado('');
+      setMonto("");
+      setDescripcion("");
+      setUsuarioDestino("");
+      setAliasSeleccionado("");
       setOpciones([]);
 
       return true;
     } catch (error) {
       notification.error({
-        message: 'Error en la transferencia',
+        message: "Error en la transferencia",
         description: error.message,
-        placement: 'topRight'
+        placement: "topRight",
       });
 
       return false;
-    } finally{
+    } finally {
       setLoadingConfirmacion(false);
     }
   };
@@ -198,80 +192,77 @@ const Transferir = () => {
   };
 
   return (
-    <div className='transferir-container'>
-      <h1 className='title-h1'>RauloCoins</h1>
+    <div className="transferir-container">
+      <div className="transferir-header-row">
+        <h1 className="title-h1 transferir-title-main">Transferir</h1>
+        <Button
+          className="transferir-btn-home"
+          icon={<HomeOutlined />}
+          onClick={() => navigate("/dashboard")}
+        >
+          Volver al Home
+        </Button>
+      </div>
       {loadingConfirmacion ? (
         <div className="loading-container">
           <Spin size="large" tip="Procesando transferencia..." />
         </div>
       ) : (
-      <Card className='transferir-card' bodyStyle={{ padding: 24 }}>
-        <div className='transferir-title'>
-          <h3 className='title-h3' style={{ margin: 0 }}>
-            TRANSFERIR
-          </h3>
-          <Button
-            icon={<HomeOutlined />}
-            onClick={() => navigate('/dashboard')}
-          >
-          </Button>
+        <div className="transferir-card">
+          <Space direction="vertical" size="large" style={{ width: "100%" }}>
+            <div>
+              <h5 className="title-h5">Alias</h5>
+              <Select
+                showSearch
+                placeholder="Buscar alias"
+                onSearch={handleBuscarUsuarios}
+                onChange={(value) => {
+                  const user = opciones.find((u) => u.username === value);
+                  setUsuarioDestino(user);
+                  setAliasSeleccionado(value);
+                }}
+                value={aliasSeleccionado}
+                loading={loading}
+                style={{ width: "100%" }}
+                filterOption={false}
+                notFoundContent={
+                  loading ? "Buscando..." : "No se encontraron resultados"
+                }
+              >
+                {opciones.map((user) => (
+                  <Option key={user.username} value={user.username}>
+                    {user.username}
+                  </Option>
+                ))}
+              </Select>
+            </div>
+
+            <div>
+              <h5 className="title-h5">Monto</h5>
+              <Input
+                type="number"
+                placeholder="Monto a transferir"
+                value={monto}
+                onChange={(e) => setMonto(e.target.value)}
+              />
+            </div>
+
+            <div>
+              <h5 className="title-h5">Descripción</h5>
+              <Input
+                type="text"
+                placeholder="Descripción de la transferencia"
+                value={descripcion}
+                onChange={(e) => setDescripcion(e.target.value)}
+              />
+            </div>
+
+            <Button type="primary" block onClick={handleTransferencia}>
+              Transferir
+            </Button>
+          </Space>
         </div>
-
-        <Space direction='vertical' size='middle' style={{ width: '100%' }}>
-          <div>
-            <h5 className='title-h5'>Alias</h5>
-            <Select
-              showSearch
-              placeholder='Buscar alias'
-              onSearch={handleBuscarUsuarios}
-              onChange={(value) => {
-                const user = opciones.find((u) => u.username === value);
-                setUsuarioDestino(user);
-                setAliasSeleccionado(value);
-              }}
-              value={aliasSeleccionado}
-              loading={loading}
-              style={{ width: '100%' }}
-              filterOption={false}
-              notFoundContent={
-                loading ? 'Buscando...' : 'No se encontraron resultados'
-              }
-            >
-              {opciones.map((user) => (
-                <Option key={user.username} value={user.username}>
-                  {user.username}
-                </Option>
-              ))}
-            </Select>
-          </div>
-
-          <div>
-            <h5 className='title-h5'>Monto</h5>
-            <Input
-              type='number'
-              placeholder='Monto a transferir'
-              value={monto}
-              onChange={(e) => setMonto(e.target.value)}
-            />
-          </div>
-
-          <div>
-            <h5 className='title-h5'>Descripción</h5>
-            <Input
-              type='text'
-              placeholder='Descripción de la transferencia'
-              value={descripcion}
-              onChange={(e) => setDescripcion(e.target.value)}
-            />
-          </div>
-
-          <Button type='primary' block onClick={handleTransferencia}>
-            Transferir
-          </Button>
-        </Space>
-      </Card>
       )}
-
       <ModalTOTP
         visible={mostrarModal}
         onClose={() => setMostrarModal(false)}

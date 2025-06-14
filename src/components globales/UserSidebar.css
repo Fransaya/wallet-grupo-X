@@ -1,0 +1,63 @@
+.user-sidebar-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(37, 99, 235, 0.09);
+  padding: 2em 1.5em;
+  max-width: 320px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  align-items: flex-end;
+  transition: box-shadow 0.3s, transform 0.2s;
+}
+.user-sidebar-card:hover {
+  box-shadow: 0 8px 32px rgba(123, 104, 238, 0.13);
+  transform: translateY(-2px) scale(1.01);
+}
+.user-sidebar-header {
+  text-align: right;
+}
+.user-sidebar-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2563eb;
+}
+.user-sidebar-email {
+  font-size: 0.95rem;
+  color: #7b68ee;
+}
+.user-sidebar-info {
+  margin-top: 1.2em;
+  font-size: 1rem;
+  color: #1a1a1a;
+  width: 100%;
+}
+.user-sidebar-label {
+  color: #2563eb;
+  font-weight: 600;
+}
+.user-sidebar-btn {
+  margin-top: 2em;
+  width: 100%;
+  background: linear-gradient(90deg, #2563eb 0%, #7b68ee 100%);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.8em 0;
+  cursor: pointer;
+  transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+}
+.user-sidebar-btn:hover {
+  background: linear-gradient(90deg, #7b68ee 0%, #2563eb 100%);
+  box-shadow: 0 4px 16px rgba(123, 104, 238, 0.13);
+  transform: scale(1.04);
+}
+@media (max-width: 900px) {
+  .user-sidebar-card {
+    max-width: 100%;
+    padding: 1.2em 0.7em;
+  }
+}

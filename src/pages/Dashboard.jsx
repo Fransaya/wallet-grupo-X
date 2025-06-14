@@ -23,7 +23,7 @@ const { Title, Text } = Typography;
 const Dashboard = () => {
   const [data, setData] = useState(null); // null por defecto
   const [transactions, setTransactions] = useState([]);
-  const [visibleCount, setVisibleCount] = useState(3);
+  const [visibleCount] = useState(3); // Solo lectura
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -53,13 +53,6 @@ const Dashboard = () => {
     }
   }, []);
 
-  const handleLogout = () => {
-    sessionStorage.removeItem("token");
-    sessionStorage.removeItem("id");
-    sessionStorage.clear();
-    navigate("/sesion/login");
-  };
-
   const handleTransferir = () => {
     navigate("/transferir");
   };
@@ -79,92 +72,72 @@ const Dashboard = () => {
       </div>
     )) || (
       <div className="dashboard-container">
-        <div className="dashboard-top-bar" style={{ justifyContent: 'flex-end' }}>
-          <Button
-            iconPosition="end"
-          >
-            Cerrar Sesion
-          </Button>
-        </div>
-        <div className="dashboard-header">
-          <p className="title-h1">
-            Hola <strong style={{ color: '#fff' }}>{data.name}.</strong> Bienvenido
-          </p>
-          <div className="img-profile">
+        {/* Fila superior: saludo y avatar */}
+        <div className="dashboard-row-top">
+          <div className="dashboard-greeting-block">
+            <h1 className="title-h1 dashboard-greeting-title">
+              👋 Hola <span style={{ color: "#fff" }}>{data.name}</span>
+            </h1>
+            <p className="dashboard-greeting-sub">Bienvenido a tu billetera</p>
+          </div>
+          <div className="dashboard-avatar-block">
             <img
               src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
               alt="Profile avatar"
-              style={{ width: "50px", height: "50px", borderRadius: "50%" }}
+              className="dashboard-avatar-img"
             />
           </div>
         </div>
 
-        <div className="dashboard-card-container">
-          <div className="dashboard-card">
-            <div className="dashboard-card-header" style={{ borderBottom: 'none' }}>
-              <h6 className="title-h6">
-                Tu Balance <EyeFilled style={{ color: "#BB0A21" }} />
-              </h6>
-            </div>
-
-            <div className="dashboard-balance">
-              <h1 className="title-h1-balance" style={{ margin: "0" }}>
-                <LuWallet style={{ color: "#00bcd4", fontSize: "32px" }} />
-                {data ? `${data.balance}` : "Cargando..."}
-              </h1>
-            </div>
-
-            <div className="dashboard-actions">
-              <Space size="middle">
-                <div className="send-transfer" onClick={handleTransferir}>
-                  <span className="circle-btn">
-                    <span className="circle-inner">
-                      <FiArrowUp />
-                    </span>
-                  </span>
-                  Transferir
-                </div>
-
-                <div className="go-profile" onClick={handleDatos}>
-                  <span className="circle-btn">
-                    <span className="circle-inner">
-                      <FiUser />
-                    </span>
-                  </span>
-                  Ver Perfil
-                </div>
-              </Space>
-            </div>
+        {/* Card de balance y acciones */}
+        <div className="dashboard-card-balance">
+          <div className="dashboard-balance-block">
+            <h2 className="dashboard-balance-title">
+              <LuWallet
+                style={{
+                  color: "#00bcd4",
+                  fontSize: "2.2rem",
+                  marginRight: 10,
+                }}
+              />
+              {data ? `${data.balance}` : "Cargando..."}
+            </h2>
+            <span className="dashboard-balance-label">Tu balance</span>
+          </div>
+          <div className="dashboard-actions-block">
+            <Button className="dashboard-action-btn" onClick={handleTransferir}>
+              <FiArrowUp style={{ marginRight: 8 }} /> Transferir
+            </Button>
+            <Button className="dashboard-action-btn" onClick={handleDatos}>
+              <FiUser style={{ marginRight: 8 }} /> Ver Perfil
+            </Button>
           </div>
         </div>
 
-        <div
-          style={{ marginTop: "30px" }}
-          bodyStyle={{ padding: "12px" }}
-        >
-          <div className="dashboard-card-header">
+        {/* Card de historial */}
+        <div className="dashboard-history-container">
+          <div className="dashboard-history-header dashboard-card-header">
             <h6 className="title-h6" strong>
-              Historial de transferencias{" "}
+              Historial de transferencias
             </h6>
           </div>
           <hr />
-
           <List
+            className="dashboard-history-list"
             itemLayout="horizontal"
             dataSource={transactions.slice(0, visibleCount)}
             renderItem={(item) => {
               const isReceived = item.type === "received";
               const icon = isReceived ? (
-                <FiArrowRightCircle style={{ color: "green" }} />
+                <FiArrowRightCircle style={{ color: "#22c55e" }} />
               ) : (
-                <FiArrowLeftCircle style={{ color: "red" }} />
+                <FiArrowLeftCircle style={{ color: "#ef4444" }} />
               );
               const user = isReceived ? item.fromName : item.toName;
               const label = isReceived ? "Recibida" : "Enviada";
               const fecha = moment
                 .unix(item.createdAt)
                 .format("DD/MM/YYYY HH:mm");
-
               return (
                 <List.Item
                   onClick={() =>
@@ -173,22 +146,21 @@ const Dashboard = () => {
                   style={{ cursor: "pointer" }}
                 >
                   <List.Item.Meta
-                    title={`${user}`}
+                    title={
+                      <span className="dashboard-history-list-title">
+                        {user}
+                      </span>
+                    }
                     description={
-                      <>
-                        <div>{fecha}</div>
-                      </>
+                      <span className="dashboard-history-list-desc">
+                        {fecha}
+                      </span>
                     }
                   />
-                  <Text
-                    strong
-                    style={{ color: item.type === "sent" ? "red" : "green" }}
-                  >
+                  <Text strong>
                     <span className="transaction-amount">
-                      {" "}
                       {isReceived ? "+" : "-"} R$ {Math.abs(item.amount)}
                     </span>
-
                     <div className="transaction-icon-text">
                       <i
                         className="icon-transaction"
@@ -203,7 +175,6 @@ const Dashboard = () => {
               );
             }}
           />
-
           <div
             style={{
               textAlign: "end",

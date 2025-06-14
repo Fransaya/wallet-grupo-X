@@ -62,10 +62,6 @@ const DatosUser = () => {
     );
   }
 
-  const handleRoute = (route) => {
-    navigate(route);
-  };
-
   // Abrir modal y setear valores iniciales
   const openEditModal = () => {
     form.setFieldsValue({
@@ -124,139 +120,98 @@ const DatosUser = () => {
   return (
     <div className="dashboard-container user-profile-bg">
       <div className="user-profile-wrapper">
-        <div className="dashboard-header">
-          <h1 className="title-h1">Perfil de {user.name}</h1>
-        </div>
-
-        <Card
-          className="datos-container user-profile-card"
-          bodyStyle={{ padding: "0px" }}
-          bordered={false}
- style={{
-            backgroundColor: "#1e1e1e", // Dark background
-            color: "#ffffff", // Light text color
-            border: "1px solid #333", // Subtle border
-          }}
-        >
-          <div className="user-profile-header">
-            <Avatar size={80} icon={<UserOutlined />} />
-            <div
-              style={{
-                marginLeft: 24,
-                width: "100%",
-                gap: 20,
-                alignItems: "center",
-                display: "flex",
-              }}
-            >
+        <div className="profile-main-card">
+          <div className="profile-main-grid">
+            {/* Columna izquierda: avatar y username */}
+            <div className="profile-avatar-col">
+              <Avatar
+                size={90}
+                icon={<UserOutlined />}
+                className="profile-avatar"
+              />
               <Text
                 copyable={{
                   text: user.username,
                   tooltips: `${user.username}`,
-                  icon: <CopyOutlined style={{ color: "black" }} />,
+                  icon: <CopyOutlined style={{ color: "#fff" }} />,
                 }}
                 type="secondary"
-                style={{ fontSize: 38 }}
+                className="profile-username"
               >
                 @{user.username}
               </Text>
-              <Button
-                onClick={() => handleRoute("/dashboard")}
- icon={<HomeOutlined style={{ color: '#ffffff' }} />} // Changed icon color to white
- style={{
-                  height: 40,
-                  padding: '0 10px'
-                }}
-                size="large"
-                style={{ height: 40, padding: "0 10px" }}
-              ></Button>
+            </div>
+            {/* Columna derecha: datos */}
+            <div className="profile-info-col">
+              <h1 className="title-h1 profile-title">Perfil de {user.name}</h1>
+              <div className="profile-info-list">
+                <div>
+                  <UserOutlined /> <Text strong>ID:</Text>{" "}
+                  <Text>{user.id}</Text>
+                </div>
+                <div>
+                  <MailOutlined /> <Text strong>Email:</Text>{" "}
+                  <Text>{user.email}</Text>
+                </div>
+                <div>
+                  <TeamOutlined /> <Text strong>Tipo de Usuario:</Text>{" "}
+                  <Tag color="blue">{user.userType}</Tag>
+                </div>
+                <div>
+                  <DollarOutlined /> <Text strong>Balance:</Text>{" "}
+                  <Text>${user.balance != null ? user.balance : 0}</Text>
+                </div>
+                <div>
+                  <CheckCircleOutlined
+                    style={{ color: user.isVerified ? "#22c55e" : "#ef4444" }}
+                  />{" "}
+                  <Text strong>Cuenta Verificada:</Text>{" "}
+                  <Text>{user.isVerified ? "Sí" : "No"}</Text>
+                </div>
+                <div>
+                  <CheckCircleOutlined
+                    style={{ color: user.totpVerified ? "#22c55e" : "#ef4444" }}
+                  />{" "}
+                  <Text strong>2FA Verificada:</Text>{" "}
+                  <Text>{user.totpVerified ? "Sí" : "No"}</Text>
+                </div>
+                <div>
+                  <ClockCircleOutlined /> <Text strong>Cuenta creada el:</Text>{" "}
+                  <Text>
+                    {user.createdAt
+                      ? moment.unix(user.createdAt).format("DD/MM/YYYY HH:mm")
+                      : "N/A"}
+                  </Text>
+                </div>
+              </div>
+              <div className="profile-btns">
+                <Button
+                  className="btn-editar-perfil"
+                  icon={<EditOutlined />}
+                  size="large"
+                  style={{
+                    height: 40,
+                    padding: "0 10px",
+                    background: "#f0f0f0",
+                  }}
+                  onClick={openEditModal}
+                >
+                  Editar perfil
+                </Button>
+                <Button
+                  className="btn-volver-home"
+                  icon={<HomeOutlined />}
+                  size="large"
+                  style={{ height: 40, padding: "0 10px" }}
+                  onClick={() => navigate("/dashboard")}
+                >
+                  Volver al Home
+                </Button>
+              </div>
             </div>
           </div>
-
-          <div className="user-profile-info">
-            <div>
-              <UserOutlined style={{ marginRight: 8 }} />
-              <Text strong>ID:</Text> <Text>{user.id}</Text>
-            </div>
-            <div>
-              <MailOutlined style={{ marginRight: 8 }} />
-              <Text strong>Email:</Text> <Text>{user.email}</Text>
-            </div>
-            <div>
-              <TeamOutlined style={{ marginRight: 8 }} />
-              <Text strong>Tipo de Usuario:</Text>{" "}
-              <Tag color="blue">{user.userType}</Tag>
-            </div>
-            <div>
-              <DollarOutlined style={{ marginRight: 8, color: "#1976d2" }} />
-              <Text strong>Balance:</Text>{" "}
-              <Text>${user.balance != null ? user.balance : 0}</Text>
-            </div>
-            <div>
-              <CheckCircleOutlined
-                style={{
-                  marginRight: 8,
-                  color: user.isVerified ? "green" : "red",
-                }}
-              />
-              <Text strong>Cuenta Verificada:</Text>{" "}
-              <Text>{user.isVerified ? "Sí" : "No"}</Text>
-            </div>
-            <div>
-              <CheckCircleOutlined
-                style={{
-                  marginRight: 8,
-                  color: user.totpVerified ? "green" : "red",
-                }}
-              />
-              <Text strong>2FA Verificada:</Text>{" "}
-              <Text>{user.totpVerified ? "Sí" : "No"}</Text>
-            </div>
-            <div>
-              <ClockCircleOutlined style={{ marginRight: 8 }} />
-              <Text strong>Cuenta creada el:</Text>{" "}
-              <Text>
-                {user.createdAt
-                  ? moment.unix(user.createdAt).format("DD/MM/YYYY HH:mm")
-                  : "N/A"}
-              </Text>
-            </div>
-          </div>
-          <div className="btn user-profile-btns">
-            <Button
-              className="btn-editar-perfil"
-              icon={<EditOutlined />}
-              size="large"
-              style={{
-                height: 40,
-                padding: "0 10px",
-                background: "#f0f0f0",
-              }}
-              onClick={openEditModal}
-            >
-              Editar perfil
-            </Button>
-            {/* <Button
-              className="btn-editar-pass"
-              onClick={() => navigate("/cambiar-password")}
-              style={{
-                marginRight: 16,
-                backgroundColor: "#bb0a21",
-                color: "white",
-                border: "none",
-                fontSize: 16,
-                height: 40,
-                padding: "0 10px",
-              }}
-              icon={<LockOutlined />}
-              size="large"
-            >
-              Cambiar Contraseña
-            </Button> */}
-          </div>
-        </Card>
+        </div>
       </div>
-
       {/* Modal para editar perfil */}
       <Modal
         title="Editar perfil"

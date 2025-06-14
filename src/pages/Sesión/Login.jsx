@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import "./login.css";
-import { Card, Input, Button, Typography, Space, message } from "antd";
+import { Card, Typography, Space, message } from "antd";
 import { Link } from "react-router-dom";
 import Endpoints from "../../API/Endpoints";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Input } from "../../components globales/Input";
+import { Button } from "../../components globales/Button";
 
 const { Title } = Typography;
 
@@ -13,7 +15,6 @@ const Login = () => {
   const [alias, setAlias] = useState("");
   const [totp, setTotp] = useState("");
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState(null);
 
   const { loginWithPopup, getIdTokenClaims, getAccessTokenSilently } =
     useAuth0();
@@ -129,7 +130,6 @@ const Login = () => {
       };
 
       const loginRespose = await axios(loginConfig);
-      setData(loginRespose);
 
       sessionStorage.setItem("token", loginRespose.data.success);
       sessionStorage.setItem("user", JSON.stringify(loginRespose.data));
@@ -170,29 +170,36 @@ const Login = () => {
     <div className="login-container">
       <h1 className="login-title title-h1">RauloCoins</h1>
       <Card className="login-card" bodyStyle={{ padding: "12px" }}>
-        <h3 className="title-h3">INGRESAR</h3>
-
+        <h3 className="login-subtitle title-h3">INGRESAR</h3>
         <Space direction="vertical" size="small" style={{ width: "100%" }}>
-          <h5 className="title-h5">Alias</h5>
+          <h5 className="login-label title-h5">Alias</h5>
           <Input
             placeholder="Alias"
             value={alias}
             onChange={(e) => setAlias(e.target.value)}
           />
-          <h5 className="title-h5">TOTP</h5>
-          <Input.OTP placeholder="TOTP" value={totp} onChange={setTotp} />
+          <h5 className="login-label title-h5">TOTP</h5>
+          <Input
+            placeholder="TOTP"
+            value={totp}
+            onChange={(e) => setTotp(e.target.value)}
+          />
 
           <Button
-            type="default"
-            block
             className="auth0-button"
             onClick={handleLoginWithAuth0}
             loading={loading}
+            style={{ width: "100%" }}
           >
             Ingresar con Auth0
           </Button>
 
-          <Button type="primary" block onClick={handleLogin} loading={loading}>
+          <Button
+            type="primary"
+            style={{ width: "100%" }}
+            onClick={handleLogin}
+            loading={loading}
+          >
             Ingresar
           </Button>
 
