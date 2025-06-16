@@ -89,6 +89,43 @@
   transform: scale(1.04);
 }
 
+.recuperar-button {
+  position: relative !important;
+  margin-top: 1.2rem !important;
+  background: transparent !important;
+  color: #2563eb !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  height: 45px !important;
+  font-size: 1.1rem !important;
+  overflow: hidden !important;
+  border: none !important;
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s, transform 0.2s !important;
+  z-index: 0 !important;
+}
+
+.recuperar-button::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  padding: 2px !important; /* ancho del borde */
+  border-radius: 12px !important;
+  background: linear-gradient(90deg, #7b68ee, #2563eb) !important;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0) !important;
+  -webkit-mask-composite: xor !important;
+  mask-composite: exclude !important;
+  z-index: -1 !important;
+}
+
+.recuperar-button:hover {
+  background: linear-gradient(90deg, #7b68ee 0%, #2563eb 100%) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 16px rgba(123, 104, 238, 0.13) !important;
+  transform: scale(1.04) !important;
+}
+
 @media (max-width: 600px) {
   .login-card {
     width: 90%;

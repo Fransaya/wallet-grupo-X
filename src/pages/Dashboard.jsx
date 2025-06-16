@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Card, Typography, Button, Space, List, Avatar } from "antd";
 import "../stilos/dasboard.css";
 import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 import moment from "moment";
 import {
   LogoutOutlined,
@@ -27,6 +28,8 @@ const Dashboard = () => {
   const [visibleCount] = useState(3); // Solo lectura
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  const { logout } = useAuth0();
 
   useEffect(() => {
     // Verificar si el usuario está autenticado
@@ -69,6 +72,7 @@ const Dashboard = () => {
   const handleLogout = () => {
     // Limpiar la sesión
     sessionStorage.clear();
+    logout()
     // Redirigir al login
     navigate("/");
   };

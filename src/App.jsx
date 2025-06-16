@@ -6,16 +6,15 @@ import {
   Navigate,
 } from "react-router-dom";
 import Login from "./pages/Sesión/Login";
-import Recuperar from "./pages/Sesión/RecuperarSesión";
 import RutaProtegida from "./routes/RutaProtegida";
 import RutaPublica from "./routes/RutaPublica";
 import Dashboard from "./pages/Dashboard";
-import RegistrarSesion from "./pages/Sesión/RegistrarSesión";
 import Transferir from "./pages/Transferir";
 import DetalleMovimiento from "./pages/DetalleMovimiento";
 import CambiarContraseña from "./pages/CambiarContraseña";
 import DatosUser from "./pages/DatosUser";
 import Historial from "./pages/Historial";
+import VerificarTotpPage from "./pages/Sesión/VerificarTotpPage";
 
 function App() {
   const token = sessionStorage.getItem("token");
@@ -33,20 +32,13 @@ function App() {
             </RutaPublica>
           }
         />
+
         <Route
-          path="/sesion/recuperar"
+          path="/sesion/verificar-totp"
           element={
-            <RutaPublica>
-              <Recuperar />
-            </RutaPublica>
-          }
-        />
-        <Route
-          path="/sesion/registrar"
-          element={
-            <RutaPublica>
-              <RegistrarSesion />
-            </RutaPublica>
+            <RutaProtegida>
+              <VerificarTotpPage />
+            </RutaProtegida>
           }
         />
 
