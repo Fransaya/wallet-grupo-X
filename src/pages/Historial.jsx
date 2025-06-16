@@ -60,31 +60,109 @@ const user_hardcod = {
 
 export default function Historial() {
   const navigate = useNavigate();
+
+  const [user, setUser] = useState(null);
+  const [transfers, setTransfers] = useState([]);
+
+  const [filteredTransfers, setFilteredTransfers] = useState([]);
   const [filter, setFilter] = useState("todos");
   const [searchTerm, setSearchTerm] = useState("");
-  const [filteredTransfers, setFilteredTransfers] = useState(transferencias_hardcod);
 
+  const [loading, setLoading] = useState(true);
+
+  // useEffect(() => {
+  //   let filtered = transferencias_hardcod;
+
+  //   // Aplicar filtro por tipo
+  //   if (filter !== "todos") {
+  //     filtered = filtered.filter((t) => t.type.toLowerCase() === filter.toLowerCase());
+  //   }
+
+  //   // Aplicar búsqueda
+  //   if (searchTerm) {
+  //     const searchLower = searchTerm.toLowerCase();
+  //     filtered = filtered.filter(
+  //       (t) =>
+  //         t.name.toLowerCase().includes(searchLower) ||
+  //         t.date.toLowerCase().includes(searchLower) ||
+  //         t.amount.toLowerCase().includes(searchLower)
+  //     );
+  //   }
+
+  //   setFilteredTransfers(filtered);
+  // }, [filter, searchTerm]);
+useEffect(() => {
+  const fetchUser = () => {
+    try {
+      const storedUser = sessionStorage.getItem("user");
+      if (storedUser) {
+        const parsedUser = JSON.parse(storedUser).user;
+        setUser(parsedUser || null);
+      } else {
+        setUser(null);
+      }
+    } catch (error) {
+      console.error("Error al obtener usuario:", error);
+      setUser(null);
+    }
+  };
+
+  fetchUser();
+}, []);
+
+useEffect(() => {
+  const fetchTransfers = () => {
+    try {
+      const storedTransfer = sessionStorage.getItem("transactions");
+      if (storedTransfer) {
+        const parsedTransfer = JSON.parse(storedTransfer);
+        setTransfers(Array.isArray(parsedTransfer) ? parsedTransfer : []);
+      } else {
+        setTransfers([]);
+      }
+    } catch (error) {
+      console.error("Error al obtener transferencias:", error);
+      setTransfers([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchTransfers();
+}, []);
+
+
+  // Aplicar filtros y búsqueda
   useEffect(() => {
-    let filtered = transferencias_hardcod;
+    let filtered = [...transfers];
 
-    // Aplicar filtro por tipo
+    // Filtro por tipo
     if (filter !== "todos") {
-      filtered = filtered.filter((t) => t.type.toLowerCase() === filter.toLowerCase());
+      const tipo = filter === "enviada" ? "sent" : "received" ;
+      filtered = filtered.filter((t) => t.type?.toLowerCase() === tipo);
     }
 
-    // Aplicar búsqueda
+    // Filtro por término de búsqueda
     if (searchTerm) {
       const searchLower = searchTerm.toLowerCase();
-      filtered = filtered.filter(
-        (t) =>
-          t.name.toLowerCase().includes(searchLower) ||
-          t.date.toLowerCase().includes(searchLower) ||
-          t.amount.toLowerCase().includes(searchLower)
-      );
+
+      filtered = filtered.filter((t) => {
+        const name = t.name?.toLowerCase() || "";
+        const date = String(t.date || "").toLowerCase();
+        const amount = String(t.amount ?? "");
+
+        return (
+          name.includes(searchLower) ||
+          date.includes(searchLower) ||
+          amount.includes(searchLower)
+        );
+      });
     }
 
     setFilteredTransfers(filtered);
-  }, [filter, searchTerm]);
+  }, [filter, searchTerm, transfers]);
+
+  // if (loading) return <div>Cargando datos...</div>;
 
   return (
     <div className="historial-bg">
@@ -149,7 +227,7 @@ export default function Historial() {
             )}
           </div>
         </div>
-        <UserSidebar user={user_hardcod} />
+        <UserSidebar user={user} />
       </div>
     </div>
   );

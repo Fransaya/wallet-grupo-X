@@ -2,6 +2,11 @@ import "./UserSidebar.css";
 import { UserOutlined, DollarOutlined } from "@ant-design/icons";
 
 export function UserSidebar({ user }) {
+
+
+  if (!user) {
+    return null;
+  }
   return (
     <div className="user-sidebar">
       <div className="user-sidebar-header">
@@ -10,7 +15,7 @@ export function UserSidebar({ user }) {
         </div>
         <h3 className="user-sidebar-name">{user.name}</h3>
         <p className="user-sidebar-email">{user.email}</p>
-        <span className="user-sidebar-alias">@{user.alias}</span>
+        <span className="user-sidebar-alias">@{user.username}</span>
       </div>
 
       <div className="user-sidebar-balance">

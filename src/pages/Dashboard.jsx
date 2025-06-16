@@ -38,7 +38,7 @@ const Dashboard = () => {
         setLoading(false);
         setData(parsedUser);
 
-        console.log("Datos del usuario:", parsedUser);
+    
       } catch (error) {
         console.error("Error al parsear los datos del usuario:", error);
       }

@@ -19,3 +19,24 @@ export const buscarUsuarios = async (termino) => {
     return [];
   }
 };
+
+export const transferencias = async (userId) => {
+  try {
+    const userId = userId || JSON.parse(sessionStorage.getItem('user')).user.id;
+    if (!userId) {
+      console.error('User ID is required to fetch transfers');
+      return [];
+    }
+    const url = endpoints.getUrl(endpoints.TRANSFERENCIA.HISTORIALAUTH);
+    const response = await axios.get(`${url}?userId=${userId}`);
+
+    if (response.data.success) {
+      return response.data.transfers;
+    }
+
+    return [];
+  } catch (error) {
+    console.error('Error al obtener transferencias:', error);
+    return [];
+  }
+}

@@ -17,6 +17,8 @@ const TRANSFERENCIA = {
 
 const PERFIL = {
   EDITAR: "auth0/edit-profile",
+  BALANCE: "auth0/balance",
+
 };
 
 const getUrl = (endpoint) => `${BASE_URL}/${endpoint}`;
