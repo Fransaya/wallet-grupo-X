@@ -61,10 +61,6 @@ export function TransferCard({ transfer }) {
   doc.save(`comprobante-${transfer.id || "transaccion"}.pdf`);
 };
 
-
-  
-
-
   return (
     <div className={`transfer-card ${transfer.type.toLowerCase()}`} 
      
@@ -84,9 +80,9 @@ export function TransferCard({ transfer }) {
           <span className="transfer-card-type">{transfer.type}</span>
         </div>
 
-        <div className="transfer-card-icons">
+        <div className="transfer-card-icons" style={{ display: "flex", gap: "8px", borderRadius: "4px" }}>
           {isEnviada && (
-            <span className="transfer-card-icon enviada-icon">
+            <span className="transfer-card-icon enviada-icon" style={{ cursor: "default !important" }}>
               <ArrowUpOutlined />
             </span>
           )}
@@ -95,9 +91,7 @@ export function TransferCard({ transfer }) {
               <ArrowDownOutlined />
             </span>
           )}
-          <span className="transfer-card-icon qr" title="Ver QR">
-            <QrcodeOutlined />
-          </span>
+         
           <span className="transfer-card-icon download" title="Descargar comprobante"  
           onClick={(e) => {
             e.stopPropagation(); // evita navegación si está dentro de una tarjeta

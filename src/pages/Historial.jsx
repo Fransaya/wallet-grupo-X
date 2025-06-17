@@ -5,58 +5,6 @@ import { Input } from "antd";
 import { SearchOutlined, HomeOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
-const transferencias_hardcod = [
-  {
-    id: "1",
-    name: "Tobias Requena",
-    date: "31/05/2025 15:00",
-    amount: "10$R",
-    type: "Enviada",
-  },
-  {
-    id: "2",
-    name: "Julian Gomez",
-    date: "31/05/2025 15:00",
-    amount: "10$R",
-    type: "Recibida",
-  },
-  {
-    id: "3",
-    name: "Francisco Prueba",
-    date: "31/05/2025 15:00",
-    amount: "10$R",
-    type: "Enviada",
-  },
-  {
-    id: "4",
-    name: "Tobias Requena",
-    date: "31/05/2025 15:00",
-    amount: "10$R",
-    type: "Enviada",
-  },
-  {
-    id: "5",
-    name: "Julian Gomez",
-    date: "31/05/2025 15:00",
-    amount: "10$R",
-    type: "Recibida",
-  },
-  {
-    id: "6",
-    name: "Francisco Prueba",
-    date: "31/05/2025 15:00",
-    amount: "10$R",
-    type: "Enviada",
-  },
-];
-
-const user_hardcod = {
-  id: "1",
-  name: "Tobias Requena",
-  email: "tobias.requena@prueba.com",
-  alias: "tobias.alias",
-  balance: 45,
-};
 
 export default function Historial() {
   const navigate = useNavigate();
@@ -204,15 +152,16 @@ useEffect(() => {
               Recibidas
             </button>
           </div>
-
-          <div className="historial-search">
-            <Input
-              placeholder="Buscar por nombre, fecha o monto..."
-              prefix={<SearchOutlined style={{ color: "#7b68ee" }} />}
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              allowClear
-            />
+           <div style={{ display: "flex", justifyContent: "center", marginBottom: "20px"}}>
+              <div className="historial-search" style={{ width: "100%", maxWidth: "1000px" }}>
+                <Input
+                  placeholder="Buscar por nombre"
+                  prefix={<SearchOutlined style={{ color: "#7b68ee" }} />}
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  allowClear
+                />
+              </div> 
           </div>
 
           <div className="historial-list">

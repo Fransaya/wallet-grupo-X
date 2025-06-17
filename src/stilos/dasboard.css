@@ -450,6 +450,7 @@
     padding: 1.5em;
     gap: 1.2em;
     border-radius: 20px;
+    
   }
 
   .historial-filter-btn {
@@ -911,6 +912,9 @@
 
 .historial-filters {
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   gap: 1em;
   margin-bottom: 1.5em;
   flex-wrap: wrap;
@@ -954,6 +958,10 @@
   max-width: 500px;
   margin-bottom: 1.5em;
   position: relative;
+  
+}
+.historial-search input{
+  background-color: #23283a !important;
 }
 
 .historial-search .ant-input-affix-wrapper {
@@ -979,7 +987,7 @@
 
 .historial-search .ant-input {
   background: transparent;
-  color: #f0f0f0;
+  color: #a32a2a;
   font-size: 1.1rem;
 }
 
