@@ -117,7 +117,7 @@ const Login = () => {
   };
 
   const handleRecovery = async () => {
-    navigate("/sesion/verificar-totp");
+    navigate("/sesion/recovery-totp");
   };
 
   return (

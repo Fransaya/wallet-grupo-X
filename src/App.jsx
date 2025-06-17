@@ -15,6 +15,7 @@ import CambiarContraseña from "./pages/CambiarContraseña";
 import DatosUser from "./pages/DatosUser";
 import Historial from "./pages/Historial";
 import VerificarTotpPage from "./pages/Sesión/VerificarTotpPage";
+import RecuperarTotpPage from "./pages/Sesión/RecuperarTotpPage";
 
 function App() {
   const token = sessionStorage.getItem("token");
@@ -36,9 +37,18 @@ function App() {
         <Route
           path="/sesion/verificar-totp"
           element={
-            <RutaProtegida>
+            <RutaPublica>
               <VerificarTotpPage />
-            </RutaProtegida>
+            </RutaPublica>
+          }
+        />
+
+        <Route
+          path="/sesion/recovery-totp"
+          element={
+            <RutaPublica>
+              <RecuperarTotpPage />
+            </RutaPublica>
           }
         />
 

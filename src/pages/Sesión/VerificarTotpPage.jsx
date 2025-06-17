@@ -39,19 +39,17 @@ const VerificarTotpPage = () => {
     try {
       setLoading(true);
 
-      const token = sessionStorage.getItem("token");
+      // const token = sessionStorage.getItem("token");
+
+
       const user = JSON.parse(sessionStorage.getItem("user"));
+      console.log("ur", user)
 
       const response = await axios.post(
         Endpoints.getUrl(Endpoints.SESION.VERIFICAR), // ✅ Tu endpoint real
         {
-          username: user.username,
+          username: user.username ? user.username : user,
           totpToken: code,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
         }
       );
 
@@ -59,7 +57,8 @@ const VerificarTotpPage = () => {
         message.success("Verificación exitosa");
         user.isVerified = true;
         user.totpVerified = true;
-        sessionStorage.setItem("user", JSON.stringify(user));
+        sessionStorage.setItem("user", JSON.stringify(response.data.user));
+        sessionStorage.setItem("token", JSON.stringify(response.data.token))
         navigate("/dashboard");
       } else {
         message.error(response.data.message || "Código incorrecto");
