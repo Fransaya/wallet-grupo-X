@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Endpoints from "../../API/Endpoints";
 import { Input } from "../../components globales/Input";
 import { Button } from "../../components globales/Button";
+import "./VerificarTotpPage.css";
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -21,7 +22,8 @@ const VerificarTotpPage = () => {
   useEffect(() => {
     // Obtenemos totpSetup desde la ruta si viene por location.state
     if (location.state && location.state.totpSetup) {
-      const { qrCodeUrl, manualSetupCode, instructions } = location.state.totpSetup;
+      const { qrCodeUrl, manualSetupCode, instructions } =
+        location.state.totpSetup;
       setQrCodeUrl(qrCodeUrl);
       setManualCode(manualSetupCode);
       setInstructions(instructions);
@@ -71,44 +73,78 @@ const VerificarTotpPage = () => {
   };
 
   return (
-    <div className="login-container">
-      <h1 className="login-title title-h1">Configurar Verificación 2FA</h1>
+    <div className="verificar-totp-container">
+      <div className="verificar-totp-center">
+        <h1 className="verificar-totp-title">Configurar Verificación 2FA</h1>
+        <Card
+          className="verificar-totp-card"
+          bodyStyle={{ padding: 0, background: "transparent" }}
+        >
+          <Space direction="vertical" size="middle" style={{ width: "100%" }}>
+            <Title level={4} className="verificar-totp-step-title">
+              Paso 1: Configura tu autenticación
+            </Title>
 
-      <Card className="login-card" bodyStyle={{ padding: "16px" }}>
-        <Space direction="vertical" size="middle" style={{ width: "100%" }}>
-          <Title level={4}>Paso 1: Configura tu autenticación</Title>
+            {qrCodeUrl && (
+              <img
+                src={qrCodeUrl}
+                alt="QR Code"
+                style={{
+                  maxWidth: "220px",
+                  width: "100%",
+                  margin: "0 auto",
+                  display: "block",
+                  background: "#fff",
+                  borderRadius: "8px",
+                  padding: "8px",
+                }}
+              />
+            )}
 
-          {qrCodeUrl && <img src={qrCodeUrl} alt="QR Code" style={{ maxWidth: "100%" }} />}
+            {manualCode && (
+              <Paragraph copyable strong className="verificar-totp-manual">
+                Código manual: {manualCode}
+              </Paragraph>
+            )}
 
-          {manualCode && (
-            <Paragraph copyable strong>
-              Código manual: {manualCode}
-            </Paragraph>
-          )}
+            {instructions && (
+              <Text className="verificar-totp-instructions">
+                {instructions}
+              </Text>
+            )}
 
-          {instructions && <Text type="secondary">{instructions}</Text>}
+            <Title
+              level={5}
+              style={{ marginTop: "1rem" }}
+              className="verificar-totp-step-title"
+            >
+              Paso 2: Ingresa el código generado por tu app
+            </Title>
 
-          <Title level={5} style={{ marginTop: "1rem" }}>
-            Paso 2: Ingresa el código generado por tu app
-          </Title>
+            <Input
+              placeholder="Código TOTP"
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+              maxLength={6}
+            />
 
-          <Input
-            placeholder="Código TOTP"
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-            maxLength={6}
-          />
-
-          <Button
-            type="primary"
-            onClick={handleVerify}
-            loading={loading}
-            style={{ width: "100%" }}
-          >
-            Verificar
-          </Button>
-        </Space>
-      </Card>
+            <Button
+              type="primary"
+              onClick={handleVerify}
+              loading={loading}
+              style={{
+                width: "100%",
+                height: "50px", // Más alto
+                fontSize: "1.15rem", // Texto más grande
+                fontWeight: 600, // Más grueso
+                borderRadius: "12px", // Opcional: bordes más suaves
+              }}
+            >
+              Verificar
+            </Button>
+          </Space>
+        </Card>
+      </div>
     </div>
   );
 };
