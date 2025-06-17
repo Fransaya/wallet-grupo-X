@@ -87,7 +87,7 @@ const Login = () => {
 
       if (response.data.success) {
         const { user, needsTotpSetup } = response.data;
-        console.log(response)
+        console.log(response);
 
         sessionStorage.setItem("token", response.data.success);
         sessionStorage.setItem("user", JSON.stringify(user));
@@ -97,13 +97,16 @@ const Login = () => {
 
         // ✅ Verificación TOTP
         if (!user.isVerified || needsTotpSetup || !user.totpVerified) {
-          navigate("/sesion/verificar-totp", { state: { totpSetup: response.data.totpSetup } });
+          navigate("/sesion/verificar-totp", {
+            state: { totpSetup: response.data.totpSetup },
+          });
         } else {
           navigate("/dashboard");
         }
-
       } else {
-        message.error(response.data.message || "Error en autenticación con Auth0");
+        message.error(
+          response.data.message || "Error en autenticación con Auth0"
+        );
       }
     } catch (error) {
       console.error("Error autenticando con Auth0:", error);
@@ -111,6 +114,10 @@ const Login = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleRecovery = async () => {
+    navigate("/sesion/verificar-totp");
   };
 
   return (
@@ -130,7 +137,7 @@ const Login = () => {
           <Button
             className="recuperar-button"
             style={{ width: "100%" }}
-            // onClick={handleLogin}
+            onClick={handleRecovery}
             loading={loading}
           >
             Recuperar
