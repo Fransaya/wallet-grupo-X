@@ -40,8 +40,6 @@ const Dashboard = () => {
         const parsedUser = JSON.parse(storedUser);
         setLoading(false);
         setData(parsedUser);
-
-    
       } catch (error) {
         console.error("Error al parsear los datos del usuario:", error);
       }
@@ -50,7 +48,12 @@ const Dashboard = () => {
     if (storedTransactions) {
       try {
         const parsedTx = JSON.parse(storedTransactions);
-        setTransactions(parsedTx);
+
+        let formattedTx = parsedTx.filter(
+          (tx) => tx.type === "received" || tx.type === "sent"
+        );
+        console.log("Transacciones:", formattedTx);
+        setTransactions(formattedTx);
       } catch (error) {
         console.error("Error al parsear las transacciones:", error);
       }
@@ -72,7 +75,7 @@ const Dashboard = () => {
   const handleLogout = () => {
     // Limpiar la sesión
     sessionStorage.clear();
-    logout()
+    logout();
     // Redirigir al login
     navigate("/");
   };
@@ -86,8 +89,8 @@ const Dashboard = () => {
       <div className="dashboard-container">
         {/* Botón de cerrar sesión */}
         <div className="dashboard-top-bar">
-          <Button 
-            className="dashboard-logout-btn" 
+          <Button
+            className="dashboard-logout-btn"
             onClick={handleLogout}
             icon={<LogoutOutlined />}
           >

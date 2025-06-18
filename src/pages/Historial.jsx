@@ -5,7 +5,6 @@ import { Input } from "antd";
 import { SearchOutlined, HomeOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 
-
 export default function Historial() {
   const navigate = useNavigate();
 
@@ -39,46 +38,48 @@ export default function Historial() {
 
   //   setFilteredTransfers(filtered);
   // }, [filter, searchTerm]);
-useEffect(() => {
-  const fetchUser = () => {
-    try {
-      const storedUser = sessionStorage.getItem("user");
-      if (storedUser) {
-        const parsedUser = JSON.parse(storedUser).user;
-        setUser(parsedUser || null);
-      } else {
+  useEffect(() => {
+    const fetchUser = () => {
+      try {
+        const storedUser = sessionStorage.getItem("user");
+        if (storedUser) {
+          const parsedUser = JSON.parse(storedUser).user;
+          setUser(parsedUser || null);
+        } else {
+          setUser(null);
+        }
+      } catch (error) {
+        console.error("Error al obtener usuario:", error);
         setUser(null);
       }
-    } catch (error) {
-      console.error("Error al obtener usuario:", error);
-      setUser(null);
-    }
-  };
+    };
 
-  fetchUser();
-}, []);
+    fetchUser();
+  }, []);
 
-useEffect(() => {
-  const fetchTransfers = () => {
-    try {
-      const storedTransfer = sessionStorage.getItem("transactions");
-      if (storedTransfer) {
-        const parsedTransfer = JSON.parse(storedTransfer);
-        setTransfers(Array.isArray(parsedTransfer) ? parsedTransfer : []);
-      } else {
+  useEffect(() => {
+    const fetchTransfers = () => {
+      try {
+        const storedTransfer = sessionStorage.getItem("transactions");
+        if (storedTransfer) {
+          const parsedTransfer = JSON.parse(storedTransfer);
+          let formattedTx = parsedTransfer.filter(
+            (tx) => tx.type === "received" || tx.type === "sent"
+          );
+          setTransfers(Array.isArray(formattedTx) ? formattedTx : []);
+        } else {
+          setTransfers([]);
+        }
+      } catch (error) {
+        console.error("Error al obtener transferencias:", error);
         setTransfers([]);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.error("Error al obtener transferencias:", error);
-      setTransfers([]);
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
 
-  fetchTransfers();
-}, []);
-
+    fetchTransfers();
+  }, []);
 
   // Aplicar filtros y búsqueda
   useEffect(() => {
@@ -86,7 +87,7 @@ useEffect(() => {
 
     // Filtro por tipo
     if (filter !== "todos") {
-      const tipo = filter === "enviada" ? "sent" : "received" ;
+      const tipo = filter === "enviada" ? "sent" : "received";
       filtered = filtered.filter((t) => t.type?.toLowerCase() === tipo);
     }
 
@@ -123,7 +124,7 @@ useEffect(() => {
                 <span className="historial-title-icon">↔</span>
               </h2>
             </div>
-            <button 
+            <button
               className="historial-back-btn"
               onClick={() => navigate("/dashboard")}
             >
@@ -134,34 +135,49 @@ useEffect(() => {
 
           <div className="historial-filters">
             <button
-              className={`historial-filter-btn ${filter === "todos" ? "active" : ""}`}
+              className={`historial-filter-btn ${
+                filter === "todos" ? "active" : ""
+              }`}
               onClick={() => setFilter("todos")}
             >
               Todos
             </button>
             <button
-              className={`historial-filter-btn ${filter === "enviada" ? "active" : ""}`}
+              className={`historial-filter-btn ${
+                filter === "enviada" ? "active" : ""
+              }`}
               onClick={() => setFilter("enviada")}
             >
               Enviadas
             </button>
             <button
-              className={`historial-filter-btn ${filter === "recibida" ? "active" : ""}`}
+              className={`historial-filter-btn ${
+                filter === "recibida" ? "active" : ""
+              }`}
               onClick={() => setFilter("recibida")}
             >
               Recibidas
             </button>
           </div>
-           <div style={{ display: "flex", justifyContent: "center", marginBottom: "20px"}}>
-              <div className="historial-search" style={{ width: "100%", maxWidth: "1000px" }}>
-                <Input
-                  placeholder="Buscar por nombre"
-                  prefix={<SearchOutlined style={{ color: "#7b68ee" }} />}
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  allowClear
-                />
-              </div> 
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: "20px",
+            }}
+          >
+            <div
+              className="historial-search"
+              style={{ width: "100%", maxWidth: "1000px" }}
+            >
+              <Input
+                placeholder="Buscar por nombre"
+                prefix={<SearchOutlined style={{ color: "#7b68ee" }} />}
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                allowClear
+              />
+            </div>
           </div>
 
           <div className="historial-list">

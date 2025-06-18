@@ -41,9 +41,8 @@ const VerificarTotpPage = () => {
 
       // const token = sessionStorage.getItem("token");
 
-
       const user = JSON.parse(sessionStorage.getItem("user"));
-      console.log("ur", user)
+      console.log("ur", user);
 
       const response = await axios.post(
         Endpoints.getUrl(Endpoints.SESION.VERIFICAR), // ✅ Tu endpoint real
@@ -57,8 +56,38 @@ const VerificarTotpPage = () => {
         message.success("Verificación exitosa");
         user.isVerified = true;
         user.totpVerified = true;
-        sessionStorage.setItem("user", JSON.stringify(response.data.user));
-        sessionStorage.setItem("token", JSON.stringify(response.data.token))
+        console.log("user", user);
+        const emailTemp = sessionStorage.getItem("emailTemp");
+        sessionStorage.setItem("token", JSON.stringify(response.data.token));
+
+        const historialConfig = {
+          method: "POST",
+          url: Endpoints.getUrl(Endpoints.TRANSFERENCIA.HISTORIALAUTH),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          data: {
+            email: emailTemp,
+          },
+        };
+
+        const historialResponse = await axios(historialConfig);
+
+        if (historialResponse.data.success) {
+          const userData = {
+            ...user,
+            email: emailTemp || user.email,
+            balance: historialResponse.data.user.balance, // Aseguramos que el email esté actualizado
+          };
+          sessionStorage.setItem("user", JSON.stringify(userData));
+          sessionStorage.setItem(
+            "transactions",
+            JSON.stringify(historialResponse.data.transactions)
+          );
+        }
+
+        // consulto nuevamente el usuario para asegurarme de que está actualizado
+
         navigate("/dashboard");
       } else {
         message.error(response.data.message || "Código incorrecto");
@@ -77,7 +106,12 @@ const VerificarTotpPage = () => {
         <h1 className="verificar-totp-title">Configurar Verificación 2FA</h1>
         <Card
           className="verificar-totp-card"
-          bodyStyle={{ padding: 0, background: "transparent" }}
+          bodyStyle={{
+            padding: 0,
+            background: "transparent",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
         >
           <Space direction="vertical" size="middle" style={{ width: "100%" }}>
             <Title level={4} className="verificar-totp-step-title">
@@ -133,6 +167,7 @@ const VerificarTotpPage = () => {
               loading={loading}
               style={{
                 width: "100%",
+                maxWidth: "300px", // Ancho máximo
                 height: "50px", // Más alto
                 fontSize: "1.15rem", // Texto más grande
                 fontWeight: 600, // Más grueso
