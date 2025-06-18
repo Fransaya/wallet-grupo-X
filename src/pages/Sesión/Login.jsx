@@ -140,7 +140,7 @@ const Login = () => {
             onClick={handleRecovery}
             loading={loading}
           >
-            Recuperar
+            Recuperar TOTP
           </Button>
         </Space>
       </Card>

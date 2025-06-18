@@ -37,9 +37,7 @@ function App() {
         <Route
           path="/sesion/verificar-totp"
           element={
-            <RutaPublica>
-              <VerificarTotpPage />
-            </RutaPublica>
+            <VerificarTotpPage />
           }
         />
 
