@@ -228,7 +228,7 @@ const Transferir = () => {
                 style={{ width: "100%" }}
                 filterOption={false}
                 notFoundContent={
-                  loading ? "Buscando..." : "No se encontraron resultados"
+                  loading ? <p style={{ color: "white" }}>Buscando... </p> : <p style={{ color: "white" }}>No se encontraron resultados</p>
                 }
               >
                 {opciones.map((user) => (
@@ -240,14 +240,24 @@ const Transferir = () => {
             </div>
 
             <div>
-              <h5 className="title-h5">Monto</h5>
-              <Input
-                type="number"
-                placeholder="Monto a transferir"
-                value={monto}
-                onChange={(e) => setMonto(e.target.value)}
-              />
-            </div>
+          <h5 className="title-h5">Monto</h5>
+          <Input
+            type="text"
+            placeholder="Monto a transferir"
+            value={monto}
+            onChange={(e) => {
+              const value = e.target.value;
+
+              
+              if (/^\d*$/.test(value)) {
+                setMonto(value);
+              }
+            }}
+            inputMode="numeric" 
+            pattern="\d*"
+          />
+          
+        </div>
 
             <div>
               <h5 className="title-h5">Descripción</h5>

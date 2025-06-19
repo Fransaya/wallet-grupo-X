@@ -160,22 +160,38 @@ const VerificarTotpPage = () => {
               onChange={(e) => setCode(e.target.value)}
               maxLength={6}
             />
-
-            <Button
+            <div   style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "100%",
+                  }}>
+              <Button
               type="primary"
               onClick={handleVerify}
               loading={loading}
               style={{
+
                 width: "100%",
-                maxWidth: "300px", // Ancho máximo
-                height: "50px", // Más alto
-                fontSize: "1.15rem", // Texto más grande
-                fontWeight: 600, // Más grueso
-                borderRadius: "12px", // Opcional: bordes más suaves
+              maxWidth: "300px",
+              height: "50px",
+              fontSize: "1.15rem",
+              fontWeight: 600,
+              borderRadius: "12px",
+              display: "inline-block"
+
+                // width: "100%",
+                // maxWidth: "300px", // Ancho máximo
+                // height: "50px", // Más alto
+                // fontSize: "1.15rem", // Texto más grande
+                // fontWeight: 600, // Más grueso
+                // borderRadius: "12px", // Opcional: bordes más suaves
               }}
             >
               Verificar
             </Button>
+            </div>
+            
           </Space>
         </Card>
       </div>
