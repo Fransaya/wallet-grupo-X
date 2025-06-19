@@ -38,6 +38,7 @@ const Dashboard = () => {
     if (storedUser) {
       try {
         const parsedUser = JSON.parse(storedUser);
+        console.log("Datos del usuario:", parsedUser);
         setLoading(false);
         setData(parsedUser);
       } catch (error) {
@@ -102,7 +103,10 @@ const Dashboard = () => {
         <div className="dashboard-row-top">
           <div className="dashboard-greeting-block">
             <h1 className="title-h1 dashboard-greeting-title">
-              👋 Hola <span style={{ color: "#fff" }}>{data.name}</span>
+              👋 Hola{" "}
+              <span style={{ color: "#fff" }}>
+                {data.name || data.username}
+              </span>
             </h1>
             <p className="dashboard-greeting-sub">Bienvenido a tu billetera</p>
           </div>
